@@ -1,7 +1,11 @@
-<?="Hola"?>
-<form name="search">
-    <input type="text" placeholder="Escriba el texto a buscar" >
-    <input type="submit" value="Buscar">
-</form>
+<div>
+    <form name="search-youtube">
+        <input type="text" name="query" placeholder="Escriba el texto a buscar" >
+        <input type="submit" value="Buscar">
+    </form>
+</div>
 
-<section id="main" >Parte principal</section>
+<div id="resultados">
+    <p>Aquí aparecerán los resultados de la búsqueda</p>
+</div>
+
