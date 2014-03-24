@@ -16,11 +16,9 @@ function initForms(){
         e.preventDefault();
         var form = $(this).serializeArray();
         var data = {};
-        console.log($(this).attr("name"));
         form.forEach(function(object){
             data[object.name] = object.value;
         })
-        console.log(data);
         searchYoutube(data);
     });
 };
@@ -50,18 +48,18 @@ function initLinks(){
 function searchYoutube(data) {
     var q = data['query'];
     var request = gapi.client.youtube.search.list({
-        q: q,
-        part: 'snippet'
+        part: 'snippet',
+        q: q
     });
 
     request.execute(function(response) {
+        console.log(response);
         var str = JSON.stringify(response.result);
-        $('#main').html(str);
+        $('#resultados').html(str);
     });
 }
 
 function handleAPILoaded() {
-//    $('#search-button').attr('disabled', false);
-    console.log("API loaded");
+    console.log("API loaded!!");
 }
 
