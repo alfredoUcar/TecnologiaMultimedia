@@ -46,14 +46,10 @@ function initLinks(){
 
 // Search for a specified string.
 function searchYoutube(data) {
-    var q = data['query'];
-    var request = gapi.client.youtube.search.list({
-        part: 'snippet',
-        q: q
-    });
+    data['part'] = 'id,snippet';
+    var request = gapi.client.youtube.search.list(data);
 
     request.execute(function(response) {
-        console.log(response);
         var str = JSON.stringify(response.result);
         $('#resultados').html(str);
     });
