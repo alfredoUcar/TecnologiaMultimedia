@@ -11,7 +11,7 @@ var serieslyAPI = {
     app_ID: 2178,
     app_secret: "TX7hZNhWKbehh4fKUbvX",
 
-    auth_token: "", //token de autorización
+    auth_token: null, //token de autorización
 
     base_url: "http://api.series.ly/v2/", //para peticiones a la API
 
@@ -38,7 +38,10 @@ function init(){
 };
 
 function initAPIs(){
-    serieslyAPI.authenticate();
+    if (serieslyAPI.auth_token == null){
+        serieslyAPI.authenticate();
+    }
+
 }
 
 function initForms(){
