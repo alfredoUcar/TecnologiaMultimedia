@@ -57,7 +57,6 @@ var serieslyAPI = {
     app_secret: "TX7hZNhWKbehh4fKUbvX",
 
     auth_token: null, //token de autorización
-
     base_url: "http://api.series.ly/v2/", //para peticiones a la API
 
     authenticate: function (){
@@ -81,6 +80,7 @@ function init(){
     loadSeriesly();
     initForms();
     initLinks();
+    initInterface();
 };
 
 function loadSeriesly(){
@@ -139,6 +139,15 @@ function initLinks(){
             })
     })
 };
+
+function initInterface(){
+    //carga la lista de generos
+    $.ajax({
+        url: "generos.php", //solicita el contenido de la página
+    }).done(function(data){
+            $("nav").html(data); //carga las categorias
+        })
+}
 
 
 // realiza una búsqueda en youtube con los datos pasados por parámetros
