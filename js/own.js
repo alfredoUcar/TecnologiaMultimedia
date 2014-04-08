@@ -5,6 +5,51 @@
  * Time: 17:25
  * To change this template use File | Settings | File Templates.
  */
+// The client ID is obtained from the {{ Google Cloud Console }}
+// at {{ https://cloud.google.com/console }}.
+// If you run this code from a server other than http://localhost,
+// you need to register your own client ID.
+//var OAUTH2_CLIENT_ID = '157761386106.apps.googleusercontent.com';
+//var API_KEY = 'AIzaSyA_32yjaPOmjs_8x0trtPH5vKT41pivkrw';
+//var OAUTH2_SCOPES = [
+//    'https://www.googleapis.com/auth/youtube'
+//];
+//
+//function loadApiClient(){
+//    gapi.client.setApiKey(API_KEY);
+//    loadAPIClientInterfaces();
+//}
+//
+//// Load the client interfaces for the YouTube Analytics and Data APIs, which
+//// are required to use the Google APIs JS client. More info is available at
+//// http://code.google.com/p/google-api-javascript-client/wiki/GettingStarted#Loading_the_Client
+//function loadAPIClientInterfaces() {
+//    gapi.client.load('youtube', 'v3', function() {
+//        console.log("youtube API loaded");
+//    });
+//}
+
+var youtubeAPI = {
+    // The client ID is obtained from the {{ Google Cloud Console }}
+    // at {{ https://cloud.google.com/console }}.
+    // If you run this code from a server other than http://localhost,
+    // you need to register your own client ID.
+    OAUTH2_CLIENT_ID: '157761386106.apps.googleusercontent.com',
+    API_KEY: 'AIzaSyA_32yjaPOmjs_8x0trtPH5vKT41pivkrw',
+    OAUTH2_SCOPES: ['https://www.googleapis.com/auth/youtube'],
+    loadApiClient: function(){
+        gapi.client.setApiKey(this.API_KEY);
+        this.loadAPIClientInterfaces();
+    },
+    // Load the client interfaces for the YouTube Analytics and Data APIs, which
+    // are required to use the Google APIs JS client. More info is available at
+    // http://code.google.com/p/google-api-javascript-client/wiki/GettingStarted#Loading_the_Client
+    loadAPIClientInterfaces: function(){
+        gapi.client.load('youtube', 'v3', function() {
+            console.log("youtube API loaded");
+        });
+    }
+}
 
 var serieslyAPI = {
     //credenciales
@@ -23,8 +68,9 @@ var serieslyAPI = {
         }).done(function(data){
                 if (data['error'] == 0){//success
                     this.auth_token = data['auth_token']; //guarda el token
+                    console.log("series.ly API loaded");
                 }else{
-                    alert("No se ha podido inicializar la API de series.ly: "+data['errorMessage']);
+                    console.log("No se ha podido inicializar la API de series.ly: "+data['errorMessage']);
                 }
             })
     }
@@ -32,16 +78,20 @@ var serieslyAPI = {
 }
 
 function init(){
-    initAPIs();
+    loadSeriesly();
     initForms();
     initLinks();
 };
 
-function initAPIs(){
+function loadSeriesly(){
     if (serieslyAPI.auth_token == null){
         serieslyAPI.authenticate();
     }
+}
 
+//carga la API de youtube
+function loadYoutube(){
+    youtubeAPI.loadApiClient();
 }
 
 function initForms(){
