@@ -32,6 +32,15 @@ nav {
 	background-color: #00FF00; 
 }
 
+nav.p {
+	text-align: center;
+	width: 100%;
+}
+
+nav.p:hover {
+	background-color: #00AA00;
+}
+
 
 /* Elementos en section */
 section {

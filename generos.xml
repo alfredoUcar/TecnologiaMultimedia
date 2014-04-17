@@ -1,24 +1,24 @@
-<?xml version='1.0' encoding='ISO-8859-1'?>
+ï»¿<?xml version='1.0' encoding='UTF-8'?>
 
 <lista_generos>
-    <genero id="action">Acción</genero>
+    <genero id="action">AcciÃ³n</genero>
     <genero id="comedy">Comedia</genero>
     <genero id="family">Familiar</genero>
-    <genero id="history">Histórico</genero>
+    <genero id="history">HistÃ²rico</genero>
     <genero id="mistery">Misterio</genero>
-    <genero id="sci">Ciencia Ficción</genero>
+    <genero id="sci">Ciencia FicciÃ³n</genero>
     <genero id="war">Guerra</genero>
     <genero id="adventure">Aventura</genero>
     <genero id="crime">Crimen</genero>
-    <genero id="fantasy">Fantasía</genero>
-    <genero id="horror">horror</genero>
+    <genero id="fantasy">FantasÃ­a</genero>
+    <genero id="horror">Horror</genero>
     <genero id="news">Actualidad</genero>
     <genero id="sport">Deportes</genero>
     <genero id="western">Western</genero>
-    <genero id="animation">Animación</genero>
+    <genero id="animation">AnimaciÃ³n</genero>
     <genero id="documentary">Documental</genero>
     <genero id="film-noir">Cine Negro</genero>
-    <genero id="music">Música</genero>
+    <genero id="music">MÃºsica</genero>
     <genero id="musical">Musical</genero>
     <genero id="romance">Romance</genero>
     <genero id="thriller">Thriller</genero>

@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 <html>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-<link rel="stylesheet" type="text/css" href="css/general.css" />
-<script language="javascript" type="text/javascript" src="/js/jquery.js"></script>
-<script language="javascript" type="text/javascript" src="/js/own.js"></script>
-<script src="https://apis.google.com/js/client.js?onload=loadYoutube"></script>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/general.css" />
+		<script language="javascript" type="text/javascript" src="./js/jquery.js"></script>
+		<script language="javascript" type="text/javascript" src="./js/own.js"></script>
+		<script src="https://apis.google.com/js/client.js?onload=loadYoutube"></script>
+		<title>Tecnología Multimedia</title>
+	</head>
+	<body>
+		<header> 
+			<a href="/"> <h1>Inicio</h1> </a> 
+		</header>
+
+		<nav id="generos" >  
+
+		</nav>
 
 
-<head>
-    <title>Tecnología Multimedia</title>
+		<section id="main">
+	   
+		</section>
+	   
 
+		<footer> 
+	   
+		</footer>
 
-</head>
-<body>
-	<header> 
-		<a href="/"> <h1>Inicio</h1> </a> 
-	</header>
-
-    <nav>  
-
-    </nav>
-
-
-    <section id="main">
-   
-    </section>
-   
-
-    <footer> 
-   
-    </footer>
-
-</body>
+	</body>
 
 </html>
 
@@ -39,5 +36,6 @@
     $(document).ready(function(){
         init();
         console.log("Inicialización javascript");
+		$("#generos").load("generos.php");
     })
 </script>

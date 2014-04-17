@@ -1,4 +1,4 @@
-<?
+<?php
 
 $xsl_filename = "generos.xsl";	/* nom arxiu xsl */
 $xml_filename = "generos.xml";	/* nom arxiu xml */
