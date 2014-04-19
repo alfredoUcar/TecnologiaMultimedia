@@ -14,13 +14,21 @@
 			<a href="/"> <h1>Inicio</h1> </a> 
 		</header>
 
-		<nav id="generos" >  
-
+		<nav>  
+			<div id="buscar">
+				<form>
+					<input type="text" name="buscar">
+					<input type="submit" value="Buscar">
+				</form>
+			</div>
+			<div id="generos" >
+			
+			</div>
 		</nav>
 
 
 		<section id="main">
-	   
+
 		</section>
 	   
 
@@ -36,6 +44,6 @@
     $(document).ready(function(){
         init();
         console.log("Inicialización javascript");
-		$("#generos").load("generos.php");
+		$("#generos").add("generos.php");
     })
 </script>
