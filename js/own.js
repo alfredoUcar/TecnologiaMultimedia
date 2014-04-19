@@ -67,11 +67,41 @@ var serieslyAPI = {
         }).done(function(data){
                 if (data['error'] == 0){//success
                     this.auth_token = data['auth_token']; //guarda el token
-                    console.log("series.ly API loaded");
+//                    console.log("series.ly API loaded");
+                    return this.auth_token;
                 }else{
-                    console.log("No se ha podido inicializar la API de series.ly: "+data['errorMessage']);
+//                    console.log("No se ha podido inicializar la API de series.ly: "+data['errorMessage']);
+                    return false;
                 }
             })
+    },
+
+    //método para realizar una búsqueda
+    //query: texto a buscar
+    //dest: contenedor donde se cargan los resultados
+    search: function (query,dest){
+        var method = "search";
+        var request_url = this.base_url+method;
+        var data = {
+            filter: 2, //peliculas
+            response: 'xml',
+            auth_token: 'e192f14210ab13996939a274922e2b16', //todo: quitar token provisional y calcular otro
+            q: query
+        }
+
+        $.ajax({
+            url: request_url, //solicita el contenido de la página
+            data: data
+        }).done(function(resultsXML){
+                //TODO: procesar el xml
+                console.log("resultado de la búsqueda:");
+                var string = (new XMLSerializer()).serializeToString(resultsXML);
+                $("#resultados").html(string);
+            })
+
+
+
+
     }
 
 }
@@ -108,6 +138,8 @@ function initForms(){
             searchYoutube(data);
         }else if(formName == "search-persons"){
             requestCustomerInfo(data);
+        }else if(formName == "search-series"){
+            searchSeries(data);
         }else{
             alert("No se ha podido enviar el formulario");
         }
@@ -143,7 +175,7 @@ function initLinks(){
 function initInterface(){
     //carga la lista de generos
     $.ajax({
-        url: "generos.php", //solicita el contenido de la página
+        url: "generos.php" //solicita el contenido de la página
     }).done(function(data){
             $("nav").html(data); //carga las categorias
         })
@@ -174,5 +206,10 @@ function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este id
         }).always(function(){
             init(); //refresca los elementos
         })
+}
+
+function searchSeries(data){
+    var dest = $("#resultados");
+    serieslyAPI.search(data['query'],dest);
 }
 
