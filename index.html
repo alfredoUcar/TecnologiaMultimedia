@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="css/general.css"/>
+    <script language="javascript" type="text/javascript" src="./js/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="./js/own.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=loadYoutube"></script>
+    <title>Tecnología Multimedia</title>
+</head>
+<body>
+<header>
+    <a href="/"><h1>Inicio</h1></a>
+</header>
 
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<link rel="stylesheet" type="text/css" href="css/general.css" />
-		<script language="javascript" type="text/javascript" src="./js/jquery.js"></script>
-		<script language="javascript" type="text/javascript" src="./js/own.js"></script>
-		<script src="https://apis.google.com/js/client.js?onload=loadYoutube"></script>
-		<title>Tecnología Multimedia</title>
-	</head>
-	<body>
-		<header> 
-			<a href="/"> <h1>Inicio</h1> </a> 
-		</header>
+
 
 		<nav>  
 			<div id="buscar">
@@ -23,26 +24,27 @@
 			</div>
 			<div id="generos" ></div>
 
-		</nav>
+</nav>
 
 
-		<section id="main">
+<section id="main">
+    (Pruebas)
+    <li><a data-url-type="internal" href="search.php"> Buscar en youtube</a></li>
+    <li><a data-url-type="internal" href="searchSeries.php"> Buscar en series.ly</a></li>
+    <li><a data-url-type="internal" href="entrada.htm"> Buscar personas</a></li>
+</section>
 
-		</section>
-	   
+<footer>
 
-		<footer> 
-	   			
-		</footer>
+</footer>
 
-	</body>
+
+</body>
 
 </html>
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         init();
-        console.log("Inicialización javascript");
-		$("#generos").load("generos.php");
     })
 </script>
