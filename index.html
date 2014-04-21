@@ -21,9 +21,8 @@
 					<input type="submit" value="Buscar">
 				</form>
 			</div>
-			<div id="generos" >
-			
-			</div>
+			<div id="generos" ></div>
+
 		</nav>
 
 
@@ -33,7 +32,7 @@
 	   
 
 		<footer> 
-	   
+	   			
 		</footer>
 
 	</body>
@@ -44,6 +43,6 @@
     $(document).ready(function(){
         init();
         console.log("Inicialización javascript");
-		$("#generos").add("generos.php");
+		$("#generos").load("generos.php");
     })
 </script>

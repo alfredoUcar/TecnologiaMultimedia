@@ -41,6 +41,14 @@ nav p:hover {
 	background-color: #00AA00;
 }
 
+nav p.genero {
+	padding: 0px;
+}
+
+#generos {
+	height: 100%;
+}
+
 
 /* Elementos en section */
 section {
