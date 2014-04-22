@@ -56,37 +56,39 @@ var serieslyAPI = {
     app_ID: 2178,
     app_secret: "TX7hZNhWKbehh4fKUbvX",
 
-    auth_token: null, //token de autorización
+    //auth_token: null, //token de autorización
     base_url: "http://api.series.ly/v2/", //para peticiones a la API
 
     authenticate: function (){
+        if (getCookie("auth_token") != "") return; //ya tenemos un token disponible
+
         //http://api.series.ly/v2/auth_token/?id_api={id_api}&secret={secret}
         var request_url = this.base_url+"auth_token/?id_api="+this.app_ID+"&secret="+this.app_secret;
         $.ajax({
             url: request_url //solicita el contenido de la página
         }).done(function(data){
                 if (data['error'] == 0){//success
-                    this.auth_token = data['auth_token']; //guarda el token
-//                    console.log("series.ly API loaded");
-                    return this.auth_token;
+                    setCookie("auth_token",data['auth_token'],data['auth_expires_date']); //guarda el token en una cookie
                 }else{
-//                    console.log("No se ha podido inicializar la API de series.ly: "+data['errorMessage']);
-                    return false;
+                    console.log("No se ha podido inicializar la API de series.ly: "+data['errorMessage']);
                 }
             })
     },
 
     //método para realizar una búsqueda
     //query: texto a buscar
+    //page: página de resultados (0-index)
     //dest: contenedor donde se cargan los resultados
-    search: function (query,dest){
+    search: function (query,page,dest){
         var method = "search";
         var request_url = this.base_url+method;
         var data = {
             filter: 2, //peliculas
             response: 'xml',
-            auth_token: 'e192f14210ab13996939a274922e2b16', //todo: quitar token provisional y calcular otro
-            q: query
+            auth_token: getCookie("auth_token"),
+            q: query,
+            limit: 15, //resultados por página
+            page: page
         }
 
         $.ajax({
@@ -94,14 +96,9 @@ var serieslyAPI = {
             data: data
         }).done(function(resultsXML){
                 //TODO: procesar el xml
-                console.log("resultado de la búsqueda:");
                 var string = (new XMLSerializer()).serializeToString(resultsXML);
-                $("#resultados").html(string);
+                dest.html(string);
             })
-
-
-
-
     }
 
 }
@@ -208,8 +205,28 @@ function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este id
         })
 }
 
-function searchSeries(data){
+function searchSeries(data,page){
+    var p = page || 0;
     var dest = $("#resultados");
-    serieslyAPI.search(data['query'],dest);
+    serieslyAPI.search(data['query'],p,dest);
+}
+
+function setCookie(cname,cvalue,expDate)
+{
+    var d = new Date();
+    d.setTime(expDate);
+    document.cookie = cname + "=" + cvalue + "; " + d.toUTCString();
+}
+
+function getCookie(cname)
+{
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++)
+    {
+        var c = ca[i].trim();
+        if (c.indexOf(name)==0) return c.substring(name.length,c.length);
+    }
+    return "";
 }
 
