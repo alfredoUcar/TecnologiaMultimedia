@@ -94,10 +94,17 @@ var serieslyAPI = {
         $.ajax({
             url: request_url, //solicita el contenido de la página
             data: data
-        }).done(function(resultsXML){
-                //TODO: procesar el xml
-                var string = (new XMLSerializer()).serializeToString(resultsXML);
-                dest.html(string);
+        }).done(function(resultsXML){// se ha recibido el resultado de la búsqueda en series.ly
+                $.ajax({
+                    url: "resultPelisXSL.php", //solicita la vista de los resultados
+                    data: resultsXML,
+                    type: 'POST',
+                    processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
+                }).done(function(data){
+                    dest.html(data);console.log(data);
+                }).always(function(){
+                    init(); //refresca los elementos
+                })
             })
     }
 
@@ -191,7 +198,6 @@ function searchYoutube(data) {
 
 function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este identificador a la cadena "GetCustomerData.php?id=" para crear la URL completa , y la cargamos en la pagina actual-->
 //    document.location="procesadorXSL.php?artista=" + sId;
-
     $.ajax({
         url: "procesadorXSL.php", //solicita el contenido de la página
         data: data
@@ -213,9 +219,9 @@ function searchSeries(data,page){
 
 function setCookie(cname,cvalue,expDate)
 {
-    var d = new Date();
-    d.setTime(expDate);
-    document.cookie = cname + "=" + cvalue + "; " + d.toUTCString();
+    var d = new Date(expDate*1000);
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
 }
 
 function getCookie(cname)
