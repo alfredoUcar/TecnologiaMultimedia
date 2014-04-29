@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <title>cinematografo</title>
+  <circle stroke="#000000" id="svg_4" r="65.542046" cy="136.500002" cx="211.50001" stroke-width="2" fill="#ffffff"/>
+  <rect stroke="#000000" id="svg_5" height="138.000005" width="315" y="212.999995" x="129.999992" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#ffffff"/>
+  <path transform="rotate(-90 490.419 284.79)" stroke="#000000" id="svg_7" d="m441.420013,322.790009l18.380981,-76.000015l61.243011,0l18.374023,76.000015l-97.998016,0z" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#ffffff"/>
+  <circle stroke="#666666" id="svg_9" r="14.317822" cy="94" cx="211" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_11" r="14.317822" cy="115.5" cx="247.5" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_12" r="14.317822" cy="155.5" cx="247.5" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_13" r="14.317822" cy="178.5" cx="211.5" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_14" r="14.317822" cy="154.5" cx="176.5" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_15" r="14.317822" cy="115.5" cx="176.5" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#000000" id="svg_17" r="65.542046" cy="138.500002" cx="364.49998" stroke-width="2" fill="#ffffff"/>
+  <circle stroke="#666666" id="svg_18" r="14.317822" cy="96" cx="363.999969" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_19" r="14.317822" cy="117.5" cx="400.499969" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_20" r="14.317822" cy="157.5" cx="400.499969" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_21" r="14.317822" cy="180.5" cx="364.499969" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_22" r="14.317822" cy="156.5" cx="329.499969" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+  <circle stroke="#666666" id="svg_23" r="14.317822" cy="117.5" cx="329.499969" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" fill="#333333"/>
+ </g>
+</svg>
