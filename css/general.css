@@ -1,11 +1,12 @@
 
 /* Elementos generales */
 html {
-	height: 95%;
+	height: 100%;
 }
 
 body {
     height: 100%;
+	margin: 0px;
     background-color: #FFFFFF;
 }
 
@@ -14,7 +15,9 @@ a {
    color: #3d5678;
 }
 
-
+#nav_section {
+	min-height: 80%;
+}
 
 /* Elementos en header */
 header {
@@ -23,39 +26,40 @@ header {
 	background-color: #FF0000;
 }
 
+header h1 {
+	margin: 0px;
+	padding: 0px;
+}
 
 /* Elementos en nav */
 nav {
+	height: 100%;
 	width: 20%;
-	height: 80%;
-	float: left;
-	background-color: #00FF00; 
+	background-color: #00FF00;
+	display: block;
+	margin: 0px;
 }
 
 nav p {
 	text-align: center;
-	width: 100%;
 }
 
 nav p:hover {
 	background-color: #00AA00;
 }
 
-nav p.genero {
-	padding: 0px;
-}
-
-#generos {
+/*#generos {
 	height: 100%;
-}
+}*/
 
 
 /* Elementos en section */
 section {
-	width: 80%;
-	height: 80%;
-	float:left;
+	width: 78%;
+	min-height: 100%;
 	background-color: #0000FF;
+	display: block;
+	margin: 0px;
 }
 
 
