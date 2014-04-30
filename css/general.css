@@ -67,3 +67,37 @@ footer {
 	background-color: #FF00FF;
 }
 
+.lista-peliculas{
+    position: relative;
+    margin: 20px;
+}
+
+.resumen-pelicula{
+    position: relative;
+    width: 175px;
+    height: 260px;
+    display: inline-table;
+}
+
+.resumen-pelicula img{
+    position: relative;
+    width: 100%;
+}
+
+.info-pelicula{
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    width: 165px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    bottom: 3px;
+    z-index: 1;
+}
+
+.info-pelicula span{
+    display: block;
+}
+
+
+
