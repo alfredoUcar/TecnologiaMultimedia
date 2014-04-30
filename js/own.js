@@ -177,6 +177,11 @@ function initLinks(){
 };
 
 function initInterface(){
+    loadGenres();
+    setAnimations();
+}
+
+function loadGenres(){
     //carga la lista de generos
     $.ajax({
         url: "generos.php" //solicita el contenido de la página
@@ -185,6 +190,14 @@ function initInterface(){
         })
 }
 
+function setAnimations(){
+    //animación de 'fade in' de la descripción de la película
+    $("div.resumen-pelicula").mouseenter(function(){
+        $(this).find("div.info-pelicula").animate({top: "0%"}, "100");
+    }).mouseleave(function(){
+        $(this).find("div.info-pelicula").animate({top: "100%"}, "100");
+    })
+}
 
 // realiza una búsqueda en youtube con los datos pasados por parámetros
 function searchYoutube(data) {
