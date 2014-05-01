@@ -55,7 +55,7 @@ var serieslyAPI = {
     //credenciales
     app_ID: 2178,
     app_secret: "TX7hZNhWKbehh4fKUbvX",
-
+    mediaTypeMovie: 2,
     //auth_token: null, //token de autorización
     base_url: "http://api.series.ly/v2/", //para peticiones a la API
 
@@ -83,7 +83,7 @@ var serieslyAPI = {
         var method = "search";
         var request_url = this.base_url+method;
         var data = {
-            filter: 2, //peliculas
+            filter: this.mediaTypeMovie, //peliculas
             response: 'xml',
             auth_token: getCookie("auth_token"),
             q: query,
@@ -106,6 +106,36 @@ var serieslyAPI = {
                     init(); //refresca los elementos
                 })
             })
+    },
+    /**
+     * método para solicitar las películas más vistas
+     * dest: contenedor de destino
+     */
+    browsePopular: function (dest){
+        var method = "media/most_seen/movies";
+        var request_url = this.base_url+method;
+        var data = {
+            auth_token: getCookie("auth_token"),
+            limit: 25,
+            response: 'xml'
+        }
+
+        $.ajax({
+            url: request_url, //solicita el contenido de la página
+            data: data
+        }).done(function(resultsXML){// se ha recibido el resultado de la búsqueda en series.ly
+                $.ajax({
+                    url: "resultPelisXSL.php", //solicita la vista de los resultados
+                    data: resultsXML,
+                    type: 'POST',
+                    processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
+                }).done(function(data){
+                        dest.html(data);console.log(data);
+                    }).always(function(){
+                        init(); //refresca los elementos
+                    })
+                })
+
     }
 
 }
@@ -119,9 +149,7 @@ function init(){
 };
 
 function loadSeriesly(){
-    if (serieslyAPI.auth_token == null){
-        serieslyAPI.authenticate();
-    }
+    serieslyAPI.authenticate();
 }
 
 //carga la API de youtube
@@ -194,6 +222,7 @@ function initLinks(){
 
 function initInterface(){
     loadGenres();
+    loadPopular();
     setAnimations();
 }
 
@@ -204,6 +233,11 @@ function loadGenres(){
     }).done(function(data){
             $("nav").html(data); //carga las categorias
         })
+}
+
+function loadPopular(){
+    var destino = $("#main div.popular");
+    serieslyAPI.browsePopular(destino);
 }
 
 function setAnimations(){
@@ -242,7 +276,7 @@ function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este id
 
 function searchSeries(data,page){
     var p = page || 0;
-    var dest = $("#resultados");
+    var dest = $("#main");
     serieslyAPI.search(data['query'],p,dest);
 }
 

@@ -51,11 +51,11 @@ nav p.genero {
 
 
 /* Elementos en section */
-section {
+section#main {
 	width: 80%;
 	height: 80%;
 	float:left;
-	background-color: #0000FF;
+	background-color: #dce2f0;
 }
 
 
@@ -69,6 +69,7 @@ footer {
 
 .lista-peliculas{
     position: relative;
+    text-align: center;
     margin: 20px;
 }
 
@@ -111,6 +112,7 @@ div.pagination{
 }
 
 div.pagination a{
+    background: white;
     margin: 2px;
     border: 1px solid;
     border-radius: 2px;
@@ -134,5 +136,26 @@ svg{
     -o-transform:scale(0.6);
 }
 
+section#top{
+    position: relative;
+    float: right;
+    width: 80%;
+    background: darkgrey;
+}
 
+div#buscador{
+    float: right;
+    margin: 5px;
+}
+
+div#buscador form[name='search-series'] input{
+    border-radius: 3px;
+}
+div#buscador form[name='search-series'] input[type="submit"]{
+    background: aliceblue;
+}
+
+p.info-resultados{
+    margin-left: 20px;
+}
 
