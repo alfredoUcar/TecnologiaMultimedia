@@ -15,18 +15,25 @@ a {
    color: #3d5678;
 }
 
-.container {
-	position: relative;
-	min-height: 80%;
-	width: 100%;
-	float: left;
-
+/* Para igualar el alto de <nav> y <section> */
+.equal {
+		display:table;
+		width: 100%;
 }
+
+.row {
+	display:table-row;
+}
+
+.cell {
+	display:table-cell;
+}
+
 
 /* Elementos en header */
 header {
 	width: 100%;
-	height: 15%;
+	/*height: 15%;*/
 	background-color: #FF0000;
 }
 
@@ -37,11 +44,9 @@ header h1 {
 
 /* Elementos en nav */
 nav {
-	/*min-height: 100%;*/
 	width: 20%;
 	background-color: #00FF00;
 	margin: 0px;
-	float: left;
 }
 
 nav p {
@@ -57,19 +62,18 @@ nav p:hover {
 /* Elementos en section */
 section {
 	width: 80%;
-	/*min-height: 100%;*/
 	background-color: #0000FF;
 	margin: 0px;
-	float: left;
 }
 
 
 /* Elementos en footer */
 footer {
 	width: 100%;
-	height: 5%;
+	height: 30px;
 	float:left;
 	clear: both;
 	background-color: #FF00FF;
+	text-align: center;
 }
 
