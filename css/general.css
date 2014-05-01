@@ -89,15 +89,49 @@ footer {
     position: absolute;
     background-color: rgba(0,0,0,0.6);
     color: white;
-    width: 165px;
+    width: 155px;
     padding-left: 10px;
+    padding-right: 10px;
     padding-bottom: 10px;
-    top: 100%;
-    bottom: 0%;
+    top: 0px;
+    bottom: 4px;
+    display: none;
+    font-family: sans-serif;
 }
 
 .info-pelicula span{
     display: block;
+}
+
+div.pagination{
+    display: block;
+    vertical-align: middle;
+    text-align: center;
+    margin: 35px auto;
+}
+
+div.pagination a{
+    margin: 2px;
+    border: 1px solid;
+    border-radius: 2px;
+    padding: 2px 6px;
+}
+
+div.pagination a.page.current{
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.rating{
+    position:relative;
+    text-align: center;
+}
+
+svg{
+    -webkit-transform:scale(0.6);
+    -moz-transform:scale(0.6);
+    -ms-transform:scale(0.6);
+    -o-transform:scale(0.6);
 }
 
 

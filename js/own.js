@@ -110,6 +110,7 @@ var serieslyAPI = {
 
 }
 
+
 function init(){
     loadSeriesly();
     initForms();
@@ -152,7 +153,6 @@ function initForms(){
 
 function initLinks(){
 
-
     /**
      * Habilita la navegación interna por ajax salvo cuando es a la 'home', para recargar
      * solo el contenido principal y usar 'index.html' a modo de plantilla.
@@ -174,6 +174,22 @@ function initLinks(){
                 init(); //refresca los elementos
             })
     })
+
+    /**
+     * Habilita la navegación por páginas en la búsqueda de series.
+     * Repite la búsqueda con los datos del formulario indicando la página deseada.
+     */
+    $(".pagination a.page").not(".current").on("click",function(e){
+        e.preventDefault();
+        var page = $(this).attr("data-page-index"); //obtiene el indice de la página
+        var form = $("form").serializeArray(); //lee los datos del formulario
+        var data = {};
+        form.forEach(function(object){ //reestructura los datos para la petición
+            data[object.name] = object.value;
+        })
+        console.log(data);
+        searchSeries(data,page); //realiza la búsqueda de la página indicada
+    })
 };
 
 function initInterface(){
@@ -193,9 +209,9 @@ function loadGenres(){
 function setAnimations(){
     //animación de 'fade in' de la descripción de la película
     $("div.resumen-pelicula").mouseenter(function(){
-        $(this).find("div.info-pelicula").animate({top: "0%"}, "100");
+        $(this).find("div.info-pelicula").fadeToggle();
     }).mouseleave(function(){
-        $(this).find("div.info-pelicula").animate({top: "100%"}, "100");
+        $(this).find("div.info-pelicula").fadeToggle();
     })
 }
 
