@@ -56,23 +56,23 @@ var serieslyAPI = {
     app_ID: 2178,
     app_secret: "TX7hZNhWKbehh4fKUbvX",
     mediaTypeMovie: 2,
-    //auth_token: null, //token de autorización
     base_url: "http://api.series.ly/v2/", //para peticiones a la API
 
     authenticate: function (){
-        if (getCookie("auth_token") != "") return; //ya tenemos un token disponible
-
-        //http://api.series.ly/v2/auth_token/?id_api={id_api}&secret={secret}
-        var request_url = this.base_url+"auth_token/?id_api="+this.app_ID+"&secret="+this.app_secret;
-        $.ajax({
-            url: request_url //solicita el contenido de la página
-        }).done(function(data){
-                if (data['error'] == 0){//success
-                    setCookie("auth_token",data['auth_token'],data['auth_expires_date']); //guarda el token en una cookie
-                }else{
-                    console.log("No se ha podido inicializar la API de series.ly: "+data['errorMessage']);
-                }
-            })
+        //si no hay 'auth_token' se solicita
+        if (getCookie("auth_token") == ""){
+            //http://api.series.ly/v2/auth_token/?id_api={id_api}&secret={secret}
+            var request_url = this.base_url+"auth_token/?id_api="+this.app_ID+"&secret="+this.app_secret;
+            $.ajax({
+                url: request_url //solicita el contenido de la página
+            }).done(function(data){
+                    if (data['error'] == 0){//success
+                        setCookie("auth_token",data['auth_token'],data['auth_expires_date']); //guarda el token en una cookie
+                    }else{
+                        console.log("No se ha podido inicializar la API de series.ly: "+data['errorMessage']);
+                    }
+                })
+        }
     },
 
     //método para realizar una búsqueda
@@ -111,12 +111,12 @@ var serieslyAPI = {
      * método para solicitar las películas más vistas
      * dest: contenedor de destino
      */
-    browsePopular: function (dest){
+    browsePopular: function (dest,mode){
         var method = "media/most_seen/movies";
         var request_url = this.base_url+method;
         var data = {
             auth_token: getCookie("auth_token"),
-            limit: 25,
+            limit: 10,
             response: 'xml'
         }
 
@@ -130,12 +130,11 @@ var serieslyAPI = {
                     type: 'POST',
                     processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
                 }).done(function(data){
-                        dest.html(data);console.log(data);
-                    }).always(function(){
-                        init(); //refresca los elementos
-                    })
+                        dest.html(data);
+                }).always(function(){
+                    init(); //refresca los elementos
                 })
-
+            })
     }
 
 }
@@ -215,14 +214,13 @@ function initLinks(){
         form.forEach(function(object){ //reestructura los datos para la petición
             data[object.name] = object.value;
         })
-        console.log(data);
         searchSeries(data,page); //realiza la búsqueda de la página indicada
     })
-};
+}
 
 function initInterface(){
     loadGenres();
-    loadPopular();
+    loadContent();
     setAnimations();
 }
 
@@ -235,17 +233,18 @@ function loadGenres(){
         })
 }
 
-function loadPopular(){
-    var destino = $("#main div.popular");
-    serieslyAPI.browsePopular(destino);
+function loadContent(){
+    var mostSeenSelector = "#most-seen";
+    if ($(mostSeenSelector).is(':empty')) serieslyAPI.browsePopular($(mostSeenSelector)); //carga el contenido si está vacío
 }
+
 
 function setAnimations(){
     //animación de 'fade in' de la descripción de la película
     $("div.resumen-pelicula").mouseenter(function(){
-        $(this).find("div.info-pelicula").fadeToggle();
+        $(this).find("div.info-pelicula").fadeIn();
     }).mouseleave(function(){
-        $(this).find("div.info-pelicula").fadeToggle();
+        $(this).find("div.info-pelicula").fadeOut();
     })
 }
 

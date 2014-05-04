@@ -6,12 +6,12 @@
         <html>
             <body>
                 <xsl:apply-templates select='response'/>
-                <!--<xsl:apply-templates select='movies'/>-->
+                <xsl:apply-templates select="movies/item"/>
             </body>
         </html>
     </xsl:template>
 
-    <xsl:template match="response|movies">
+    <xsl:template match="response">
         <xsl:if test="found &gt; 0">
             <p class="info-resultados" >Se han encontrado <b><xsl:value-of select="found"/></b> resultados</p>
         </xsl:if>
@@ -35,7 +35,7 @@
     <!-- PLANTILLA PARA LA FICHA RESUMEN DE PELICULA-->
     <xsl:template match="object|item">
         <div class="resumen-pelicula" id="{idm}">
-            <img  src="{img}" onerror="this.src='http://cdn.opensly.com/no_img.jpg'" />
+            <img  src="{img}" onerror="this.src='images/no_img.jpg'" />
             <div class="info-pelicula" >
                 <h4 class="titulo-pelicula"><xsl:value-of select="name"/></h4>
                 <xsl:choose>
