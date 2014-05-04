@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<svg width="250" height="200" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"> 
+	<title>Fotograma</title>
+		
+	<!-- Fondo --> 
+	<rect id="svg_2" x="0" y="0" width="250" height="200" stroke-width="0" stroke="#000000" fill="#000000"/>
+	
+	<!-- Rectangulo central -->
+	<rect id="svg_3" x="10" y="30" width="230" height="140" stroke-width="0" stroke="#ffffff" fill="#ffffff"/>
+	
+	<!-- Rectangulos arriba -->
+	<rect id="rec" x="17" y="7" width="15" height="16" stroke-width="0" stroke="#ffffff" fill="#ffffff"/>
+	<rect id="rec" x="47" y="7" width="15" height="16" stroke-width="0" stroke="#ffffff" fill="#ffffff"/>
+	<rect id="rec" x="77" y="7" width="15" height="16" stroke-width="0" stroke="#ffffff" fill="#ffffff"/>
+
+</svg>
