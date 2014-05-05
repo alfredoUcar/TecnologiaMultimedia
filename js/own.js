@@ -130,10 +130,38 @@ var serieslyAPI = {
                     type: 'POST',
                     processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
                 }).done(function(data){
-                        dest.html(data);
+                        dest.append(data);
                 }).always(function(){
                     init(); //refresca los elementos
                 })
+            })
+    },
+    /**
+     * Obtiene toda la información sobre una película
+     * @param id (idm) de la película
+     */
+    getInfo: function(id){
+        var method = "media/full_info";
+        var request_url = this.base_url+method;
+        var data = {
+            auth_token: getCookie("auth_token"),
+            idm: id,
+            mediaType: this.mediaTypeMovie,
+            response: 'xml'
+        }
+
+        $.ajax({
+            url: request_url, //solicita el contenido de la página
+            data: data
+        }).done(function(resultsXML){// se ha recibido el resultado de la búsqueda en series.ly
+//                $.ajax({
+//                    url: "resultPelisXSL.php", //solicita la vista de los resultados
+//                    data: resultsXML,
+//                    type: 'POST',
+//                    processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
+//                }).done(function(data){
+//                    dest.append(data);
+//                })
             })
     }
 
@@ -216,6 +244,15 @@ function initLinks(){
         })
         searchSeries(data,page); //realiza la búsqueda de la página indicada
     })
+
+    /**
+     * Navega a la ficha completa de la película
+     */
+    $("div.lista-peliculas > div.resumen-pelicula").on("click",function(){
+        console.log("CLICK");
+        var $idm= $(this).attr("id");
+        serieslyAPI.getInfo($idm);
+    })
 }
 
 function initInterface(){
@@ -225,12 +262,12 @@ function initInterface(){
 }
 
 function loadGenres(){
-    //carga la lista de generos
-    $.ajax({
-        url: "generos.php" //solicita el contenido de la página
-    }).done(function(data){
-            $("nav").html(data); //carga las categorias
-        })
+        //carga la lista de generos
+        $.ajax({
+            url: "generos.php" //solicita el contenido de la página
+        }).done(function(data){
+                $("nav.generos").html(data); //carga las categorias
+            })
 }
 
 function loadContent(){

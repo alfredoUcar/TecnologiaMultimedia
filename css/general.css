@@ -161,7 +161,37 @@ p.info-resultados{
 
 #most-seen{
     display: inline-flex;
-    overflow-x: scroll;
+    /*overflow-x: scroll;*/
     width: calc(100% - 40px);
     margin-top: 10px;
+}
+
+#most-seen .resumen-pelicula{
+    width: calc(100%/10);
+    height: inherit;
+    overflow: visible;
+}
+
+#most-seen .info-pelicula{
+    width: calc(100% - 20px);
+    height: calc(100% - 14px);
+    font-size: x-small;
+    overflow: visible;
+}
+
+#most-seen .rating{
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    bottom: 0px;
+}
+
+#most-seen svg{
+    -webkit-transform:scale(0.4);
+    -moz-transform:scale(0.4);
+    -ms-transform:scale(0.4);
+    -o-transform:scale(0.4);
+    position: absolute;
+    bottom: -32px;
+    left: -32px;
 }
