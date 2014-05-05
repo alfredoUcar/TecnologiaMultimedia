@@ -1,12 +1,12 @@
 
 /* Elementos generales */
 html {
-	height: 95%;
+	height: 100%;
 }
 
 body {
     height: 100%;
-    background-color: #FFFFFF;
+	margin: 0px;
 }
 
 a {
@@ -14,6 +14,26 @@ a {
    color: #3d5678;
 }
 
+hr {
+	margin: 0 1% 0;
+	width: 98%;
+	border-width: 1px 0 0 0;
+}
+
+/* Para igualar el alto de <nav> y <section> */
+.equal {
+		display:table;
+		width: 100%;
+		height:82%;
+}
+
+.row {
+	display:table-row;
+}
+
+.cell {
+	display:table-cell;
+}
 
 
 /* Elementos en header */
@@ -21,40 +41,45 @@ header {
 	width: 100%;
 	height: 15%;
 	background-color: #FF0000;
+	background-image:url('../images/fotograma.svg');
+	background-repeat: repeat-x;
+	background-size: auto 100%;
 }
 
+header img{
+	height: 100%;
+}
+
+header h1 {
+	margin: 0px;
+	padding: 0px;
+}
 
 /* Elementos en nav */
 nav {
+	padding: 2%;
 	width: 20%;
-	height: 80%;
-	float: left;
-	background-color: #00FF00; 
+	border-style:solid;
+	border-width: 0 1px 0 0;
+	border-color: black;
 }
 
 nav p {
 	text-align: center;
-	width: 100%;
+	margin: 0px;
 }
 
 nav p:hover {
 	background-color: #00AA00;
 }
 
-nav p.genero {
-	padding: 0px;
-}
-
-#generos {
-	height: 100%;
-}
-
 
 /* Elementos en section */
+
 section#main {
 	width: 80%;
 	height: 80%;
-	float:left;
+	padding: 3%;
 	background-color: #dce2f0;
 }
 
@@ -62,9 +87,10 @@ section#main {
 /* Elementos en footer */
 footer {
 	width: 100%;
-	height: 5%;
+	height: 3%;
 	float:left;
-	background-color: #FF00FF;
+	clear: both;
+	text-align: center;
 }
 
 .lista-peliculas{
