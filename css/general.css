@@ -7,7 +7,6 @@ html {
 body {
     height: 100%;
 	margin: 0px;
-    background-color: #FFFFFF;
 }
 
 a {
@@ -15,11 +14,17 @@ a {
    color: #3d5678;
 }
 
+hr {
+	margin: 0 1% 0;
+	width: 98%;
+	border-width: 1px 0 0 0;
+}
+
 /* Para igualar el alto de <nav> y <section> */
 .equal {
 		display:table;
 		width: 100%;
-		height:85%;
+		height:82%;
 }
 
 .row {
@@ -34,15 +39,15 @@ a {
 /* Elementos en header */
 header {
 	width: 100%;
-	height: 12%;
+	height: 15%;
 	background-color: #FF0000;
-	/*background-image:url('../images/fotograma.svg');
+	background-image:url('../images/fotograma.svg');
 	background-repeat: repeat-x;
-	background-size: auto 100%;*/
+	background-size: auto 100%;
 }
 
 header img{
-	/*height: 100%;*/
+	height: 100%;
 }
 
 header h1 {
@@ -52,9 +57,11 @@ header h1 {
 
 /* Elementos en nav */
 nav {
+	padding: 2%;
 	width: 20%;
-	background-color: #00FF00;
-	margin: 0px;
+	border-style:solid;
+	border-width: 0 1px 0 0;
+	border-color: black;
 }
 
 nav p {
@@ -69,9 +76,8 @@ nav p:hover {
 
 /* Elementos en section */
 section {
+	padding: 3%;
 	width: 80%;
-	background-color: #0000FF;
-	margin: 0px;
 }
 
 
@@ -81,7 +87,6 @@ footer {
 	height: 3%;
 	float:left;
 	clear: both;
-	background-color: #FF00FF;
 	text-align: center;
 }
 
