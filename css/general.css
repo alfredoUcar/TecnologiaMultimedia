@@ -145,7 +145,7 @@ div.pagination a{
     padding: 2px 6px;
 }
 
-div.pagination a.page.current{
+div.pagination a.page.current, a.page.collapse{
     pointer-events: none;
     opacity: 0.6;
 }

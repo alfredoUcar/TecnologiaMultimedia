@@ -101,7 +101,7 @@ var serieslyAPI = {
                     type: 'POST',
                     processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
                 }).done(function(data){
-                    dest.html(data);console.log(data);
+                    dest.html(data);
                 }).always(function(){
                     init(); //refresca los elementos
                 })
@@ -244,6 +244,31 @@ function initLinks(){
         })
         searchSeries(data,page); //realiza la búsqueda de la página indicada
     })
+
+    var paginas = $(".pagination a.page").not(".next").not(".prev"); //paginas 1..actual..n
+    var current = paginas.filter(".current");
+
+    var anteriores = paginas.filter(function(){
+       return parseInt($(this).attr("data-page-index")) < parseInt(current.attr("data-page-index"));
+    });
+    if (anteriores.length > 5){
+        for(var i=2;i<anteriores.length-2;i++){
+            anteriores.filter(":eq("+i+")").hide();
+        }
+        $("<a href='#' class='page collapse'>...</a>").insertAfter(anteriores.filter(":eq(1)"));
+    }
+
+
+    var siguientes = paginas.filter(function(){
+        return parseInt($(this).attr("data-page-index")) > parseInt(current.attr("data-page-index"));
+    });
+    if (siguientes.length > 5){
+        for(var i=2;i<siguientes.length-2;i++){
+            siguientes.filter(":eq("+i+")").hide();
+        }
+        $("<a href='#' class='page collapse'>...</a>").insertAfter(siguientes.filter(":eq(1)"));
+    }
+
 
     /**
      * Navega a la ficha completa de la película

@@ -48,7 +48,10 @@
                 </xsl:choose>
                 <xsl:choose>
                     <xsl:when test="maingenre != ''">
-                        <span>Género: <xsl:value-of select="maingenre"/></span>
+                        <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
+                        <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
+                        <xsl:variable name="maingenre" select="translate(maingenre, $uppercase, $lowercase)"/>
+                        <span>Género: <xsl:value-of select="document('generos.xml')/lista_generos/genero[@id=$maingenre]"/></span>
                     </xsl:when>
                     <xsl:otherwise>
                         <span>Género: (Desconocido)</span>
