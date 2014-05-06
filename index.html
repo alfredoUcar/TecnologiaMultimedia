@@ -10,35 +10,36 @@
 </head>
 <body>
 <header>
-	<img src="images/logo.svg"  alt="Camara"/>
+    <img src="images/logo.svg" alt="Camara"/>
     <a href="/"><h1>Inicio</h1></a>
 </header>
 
 <div class="equal">
-	<div class="row">
-    <nav id="generos" class="generos cell"></nav>
+    <div class="row">
+        <nav id="generos" class="generos cell"></nav>
 
+        <section id="main" class="cell">
+            <div id="top">
+                <div id="buscador">
+                    <div class="info-resultados"></div>
+                    <form name="search-series">
+                        <input type="text" name="query" placeholder="Busca películas">
+                        <input type="submit" value="Buscar">
+                    </form>
+                </div>
+            </div>
 
-
-    <section id="main" class="cell">
-        <div id="top">
-        <div id="buscador">
-            <div class="info-resultados"></div>
-            <form name="search-series">
-                <input type="text" name="query" placeholder="Busca películas" >
-                <input type="submit" value="Buscar">
-            </form>
-        </div>
+            <div class="contenido">
+                <h1>Top 10</h1>
+                <div id="most-seen" class="lista-peliculas"></div>
+            </div>
+        </section>
     </div>
-        <h1>Top 10</h1>
-        <div id="most-seen" class="lista-peliculas"></div>
-    </section>
-	</div>
 </div>
 
 <footer>
-	<hr>
-	Tecnología Multimédia - 2014 | Alfredo Ucendo & Carlos Lucas | Datos recogidos de Series.ly y YouTube
+    <hr>
+    Tecnología Multimédia - 2014 | Alfredo Ucendo & Carlos Lucas | Datos recogidos de Series.ly y YouTube
 </footer>
 
 

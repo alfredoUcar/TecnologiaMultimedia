@@ -249,7 +249,6 @@ function initLinks(){
      * Navega a la ficha completa de la película
      */
     $("div.lista-peliculas > div.resumen-pelicula").on("click",function(){
-        console.log("CLICK");
         var $idm= $(this).attr("id");
         serieslyAPI.getInfo($idm);
     })
@@ -312,7 +311,7 @@ function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este id
 
 function searchSeries(data,page){
     var p = page || 0;
-    var dest = $("#main");
+    var dest = $("#main .contenido");
     serieslyAPI.search(data['query'],p,dest);
 }
 
