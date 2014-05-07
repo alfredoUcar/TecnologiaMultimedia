@@ -148,21 +148,27 @@ var serieslyAPI = {
             auth_token: getCookie("auth_token"),
             idm: id,
             mediaType: this.mediaTypeMovie,
-            response: 'xml'
+            response: 'xml',
+            iso_country: "ISO 3166-1 alpha-2"
         }
 
         $.ajax({
             url: request_url, //solicita el contenido de la página
             data: data
         }).done(function(resultsXML){// se ha recibido el resultado de la búsqueda en series.ly
-//                $.ajax({
-//                    url: "resultPelisXSL.php", //solicita la vista de los resultados
-//                    data: resultsXML,
-//                    type: 'POST',
-//                    processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
-//                }).done(function(data){
-//                    dest.append(data);
-//                })
+                console.log("respuesta ficha");
+                $.ajax({
+                    url: "fichaPeli.php", //solicita la vista de los resultados
+                    data: resultsXML,
+                    type: 'POST',
+                    processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
+                }).done(function(data){
+                        console.log("ver ficha");
+                        console.log(data);
+                    $("#main .contenido").html(data);
+                }).always(function(){
+                        init();
+                    })
             })
     }
 
