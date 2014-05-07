@@ -64,7 +64,8 @@ var serieslyAPI = {
             //http://api.series.ly/v2/auth_token/?id_api={id_api}&secret={secret}
             var request_url = this.base_url+"auth_token/?id_api="+this.app_ID+"&secret="+this.app_secret;
             $.ajax({
-                url: request_url //solicita el contenido de la página
+                url: request_url, //solicita el contenido de la página
+                async: false
             }).done(function(data){
                     if (data['error'] == 0){//success
                         setCookie("auth_token",data['auth_token'],data['auth_expires_date']); //guarda el token en una cookie
