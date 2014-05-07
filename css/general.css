@@ -73,6 +73,12 @@ nav p:hover {
 	background-color: #00AA00;
 }
 
+nav ul, nav ul ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 
 /* Elementos en section */
 
