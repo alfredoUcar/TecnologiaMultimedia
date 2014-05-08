@@ -221,3 +221,23 @@ p.info-resultados{
     bottom: -32px;
     left: -32px;
 }
+
+#ficha-pelicula svg{
+    -webkit-transform:scale(1.5);
+    -moz-transform:scale(1.5);
+    -ms-transform:scale(1.5);
+    -o-transform:scale(1.5);
+}
+
+#ficha-pelicula table > tbody > tr > td:first-child,th:first-child{
+    text-align: right;
+}
+
+#ficha-pelicula table > tbody > tr > td:last-child,th:last-child{
+    text-align: left;
+}
+
+#ficha-pelicula table,td,th{
+    border: 1px solid black;
+    padding: 2px 10px;
+}
