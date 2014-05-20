@@ -223,10 +223,10 @@ p.info-resultados{
 }
 
 #ficha-pelicula svg{
-    -webkit-transform:scale(1.5);
-    -moz-transform:scale(1.5);
-    -ms-transform:scale(1.5);
-    -o-transform:scale(1.5);
+    -webkit-transform:scale(1.8);
+    -moz-transform:scale(1.8);
+    -ms-transform:scale(1.8);
+    -o-transform:scale(1.8);
 }
 
 #ficha-pelicula table > tbody > tr > th{
@@ -248,6 +248,7 @@ p.info-resultados{
 #ficha-pelicula table > tbody > tr > td:last-child,th:last-child{
     text-align: left;
     background: rgb(185, 201, 250);
+    max-width: 480px;
 }
 
 /*borde redondeado para las tablas*/
@@ -267,16 +268,53 @@ p.info-resultados{
     border-bottom-right-radius: 5px;
 }
 
+ #ficha-pelicula{
+     position: relative;
+     top: 55px;
+ }
+
 #ficha-pelicula table,td,th{
     /*border: 1px solid black;*/
     padding: 5px 10px;
 }
 
+#informacion {
+    position: relative;
+    float: left;
+    margin-left: 30px;
+    max-width: 475px;
+}
 
+#reparto {
+    position: relative;
+    float: right;
+    margin-right: 75px;
+}
 
 #ficha-pelicula .titulo-pelicula{
     font-family: sans-serif;
     font-size: xx-large;
     color: rgb(66, 66, 66);
     font-weight: 600;
+}
+
+#ficha-pelicula img{
+    position: relative;
+    border-radius: 10px;
+    float: left;
+    margin-right: 25px;
+    border: 2px solid black;
+
+}
+
+#ficha-pelicula .rating{
+    position: relative;
+    text-align: right;
+    width: 730px;
+    height: 115px;
+}
+
+#sinopsis{
+    position: relative;
+    /*float: right;*/
 }

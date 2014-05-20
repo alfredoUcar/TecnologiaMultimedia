@@ -7,6 +7,10 @@
             <h1 class="titulo-pelicula"><xsl:value-of select="name"/></h1>
             <div id="sinopsis">
                 <h3>Sinopsis</h3>
+                <xsl:choose>
+                    <xsl:when test="plot"><xsl:value-of select="plot"/></xsl:when>
+                    <xsl:otherwise>(Ninguna descripción disponible para esta película)</xsl:otherwise>
+                </xsl:choose>
                 <xsl:value-of select="plot"/>
             </div>
             <div id="informacion">
