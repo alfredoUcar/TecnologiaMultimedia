@@ -5,6 +5,10 @@
             <img  src="{img}" onerror="this.src='images/no_img.jpg'" />
             <xsl:apply-templates select="rating"/>
             <h1 class="titulo-pelicula"><xsl:value-of select="name"/></h1>
+            <div id="sinopsis">
+                <h3>Sinopsis</h3>
+                <xsl:value-of select="plot"/>
+            </div>
             <div id="informacion">
                 <h3>Información</h3>
                 <table>
@@ -23,10 +27,6 @@
                     <tr><th>Nombre</th><th>Personaje</th></tr>
                     <xsl:apply-templates select="cast"/>
                 </table>
-            </div>
-            <div id="sinopsis">
-                <h3>Sinopsis</h3>
-                <xsl:value-of select="plot"/>
             </div>
         </div>
     </xsl:template>

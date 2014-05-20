@@ -290,6 +290,7 @@ function initInterface(){
     loadGenres();
     loadContent();
     setAnimations();
+    setStyles();
 }
 
 function loadGenres(){
@@ -314,6 +315,10 @@ function setAnimations(){
     }).mouseleave(function(){
         $(this).find("div.info-pelicula").fadeOut();
     })
+}
+
+function setStyles(){
+    $("tr:odd").addClass("odd");
 }
 
 // realiza una búsqueda en youtube con los datos pasados por parámetros

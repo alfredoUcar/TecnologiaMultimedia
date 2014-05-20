@@ -229,15 +229,54 @@ p.info-resultados{
     -o-transform:scale(1.5);
 }
 
+#ficha-pelicula table > tbody > tr > th{
+    background: rgb(255, 245, 169);
+    text-align: center;
+    font-family: sans-serif;
+    padding: 8px 15px;
+}
+
 #ficha-pelicula table > tbody > tr > td:first-child,th:first-child{
     text-align: right;
+    color: rgb(26, 77, 141);
+    background: whitesmoke;
+    /* border-radius: 5px; */
+    border-right: 3px solid grey;
 }
+
 
 #ficha-pelicula table > tbody > tr > td:last-child,th:last-child{
     text-align: left;
+    background: rgb(185, 201, 250);
+}
+
+/*borde redondeado para las tablas*/
+ table > tbody > tr:first-child > td:first-child,th:first-child{
+    border-top-left-radius: 5px;
+}
+
+ table > tbody > tr:first-child > td:last-child,th:last-child{
+    border-top-right-radius: 5px;
+}
+
+ table > tbody > tr:last-child > td:first-child{
+    border-bottom-left-radius: 5px;
+}
+
+ table > tbody > tr:last-child > td:last-child{
+    border-bottom-right-radius: 5px;
 }
 
 #ficha-pelicula table,td,th{
-    border: 1px solid black;
-    padding: 2px 10px;
+    /*border: 1px solid black;*/
+    padding: 5px 10px;
+}
+
+
+
+#ficha-pelicula .titulo-pelicula{
+    font-family: sans-serif;
+    font-size: xx-large;
+    color: rgb(66, 66, 66);
+    font-weight: 600;
 }
