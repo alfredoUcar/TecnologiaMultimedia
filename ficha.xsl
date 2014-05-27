@@ -8,10 +8,9 @@
             <div id="sinopsis">
                 <h3>Sinopsis</h3>
                 <xsl:choose>
-                    <xsl:when test="plot"><xsl:value-of select="plot"/></xsl:when>
-                    <xsl:otherwise>(Ninguna descripción disponible para esta película)</xsl:otherwise>
+                    <xsl:when test="plot"><p><xsl:value-of select="plot"/></p></xsl:when>
+                    <xsl:otherwise><p>(Ninguna descripción disponible para esta película)</p></xsl:otherwise>
                 </xsl:choose>
-                <xsl:value-of select="plot"/>
             </div>
             <div id="informacion">
                 <h3>Información</h3>

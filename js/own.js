@@ -315,6 +315,14 @@ function setAnimations(){
     }).mouseleave(function(){
         $(this).find("div.info-pelicula").fadeOut();
     })
+
+//    $("div#buscador form[name='search-series'] input[type='text']").focus(function(){
+//        $(this).animate({"width": "100px"},500);
+//    });
+//
+//    $("div#buscador form[name='search-series'] input[type='text']").focusout(function(){
+//        $(this).animate({"width": "50px"},500,function(){$(this).css});
+//    });
 }
 
 function setStyles(){

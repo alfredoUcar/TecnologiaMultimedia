@@ -175,10 +175,53 @@ div#buscador{
 }
 
 div#buscador form[name='search-series'] input{
-    border-radius: 3px;
+    padding: 4px 10px;
+    border-top-left-radius: 10px;
+    position: relative;
+    margin-right: 0px;
+    border-bottom-left-radius: 10px;
+    border-width: thin;
+    outline: none;
 }
 div#buscador form[name='search-series'] input[type="submit"]{
-    background: aliceblue;
+    background: rgb(68, 155, 248);
+    color: white;
+    border-radius: 0px 10px 10px 0px;
+    position: relative;
+    margin-left: -5px;
+}
+
+/* animación */
+/* Chrome, Safari, Opera */
+@-webkit-keyframes formFocus
+{
+    from {background: lightgray;width: 50px}
+    to {background: white;width: 100px}
+}
+
+@keyframes formFocus
+{
+    from {background: lightgray;width: 50px}
+    to {background: white;width: 100px}
+}
+
+/* animación */
+@keyframes formFocusOut
+{
+    from {background: white;width: 100px}
+    to {background: lightgray;width: 50px}
+}
+
+div#buscador form[name='search-series'] input[type="text"]{
+    background: lightgrey;
+    width: 50px;
+
+}
+
+div#buscador form[name='search-series'] input[type="text"]:focus{
+    -webkit-animation: formFocus 0.5s forwards;
+    animation: formFocus 0.5s forwards;
+    /*background: white;width: 100px;*/
 }
 
 p.info-resultados{
@@ -202,7 +245,7 @@ p.info-resultados{
     width: calc(100% - 20px);
     height: calc(100% - 14px);
     font-size: x-small;
-    overflow: visible;
+    overflow: hidden;
 }
 
 #most-seen .rating{
@@ -270,7 +313,7 @@ p.info-resultados{
 
  #ficha-pelicula{
      position: relative;
-     top: 55px;
+     margin-top: 55px;
  }
 
 #ficha-pelicula table,td,th{
@@ -282,13 +325,14 @@ p.info-resultados{
     position: relative;
     float: left;
     margin-left: 30px;
-    max-width: 475px;
+    max-width: calc(50% - 30px);
 }
 
 #reparto {
     position: relative;
     float: right;
-    margin-right: 75px;
+    margin-right: 30px;
+    max-width: calc(50% - 30px);
 }
 
 #ficha-pelicula .titulo-pelicula{
@@ -296,6 +340,16 @@ p.info-resultados{
     font-size: xx-large;
     color: rgb(66, 66, 66);
     font-weight: 600;
+    background: white;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: 1px solid rgb(16, 91, 160);
+    border-right-width: 3px;
+    background: -webkit-linear-gradient(left, white, rgba(255,245,169,1)); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, white, rgba(255,245,169,1)); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, white, rgba(255,245,169,1)); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, white, rgba(255,245,169,1)); /* Standard syntax (must be last) */
+    padding: 10px 15px;
 }
 
 #ficha-pelicula img{
@@ -309,12 +363,20 @@ p.info-resultados{
 
 #ficha-pelicula .rating{
     position: relative;
-    text-align: right;
+    /*text-align: right;*/
     width: 730px;
     height: 115px;
 }
 
 #sinopsis{
     position: relative;
-    /*float: right;*/
+    float: right;
+    width: 100%;
+}
+
+#sinopsis h3{
+    border-bottom: 1px solid black;
+}
+#ficha-pelicula p,h3{
+    font-family: sans-serif;
 }
