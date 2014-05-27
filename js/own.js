@@ -298,7 +298,7 @@ function loadGenres(){
         $.ajax({
             url: "generos.php" //solicita el contenido de la página
         }).done(function(data){
-                $("nav.generos").html(data); //carga las categorias
+                $("nav ul.generos").html(data); //carga las categorias
             })
 }
 
