@@ -177,7 +177,6 @@ div#buscador{
 div#buscador form[name='search-series'] input{
     padding: 4px 10px;
     border-top-left-radius: 10px;
-    position: relative;
     margin-right: 0px;
     border-bottom-left-radius: 10px;
     border-width: thin;
@@ -187,7 +186,8 @@ div#buscador form[name='search-series'] input[type="submit"]{
     background: rgb(68, 155, 248);
     color: white;
     border-radius: 0px 10px 10px 0px;
-    position: relative;
+    padding-top: 5px;
+    padding-bottom: 3px;
     margin-left: -5px;
 }
 
@@ -203,13 +203,6 @@ div#buscador form[name='search-series'] input[type="submit"]{
 {
     from {background: lightgray;width: 50px}
     to {background: white;width: 100px}
-}
-
-/* animación */
-@keyframes formFocusOut
-{
-    from {background: white;width: 100px}
-    to {background: lightgray;width: 50px}
 }
 
 div#buscador form[name='search-series'] input[type="text"]{
