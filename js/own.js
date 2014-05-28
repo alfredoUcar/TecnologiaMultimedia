@@ -348,7 +348,7 @@ function searchYoutube(data) {
     request.execute(function(response) {
         var str = JSON.stringify(response.result);
         var x2js = new X2JS();
-        var xml = x2js.json2xml_str(str);
+        var xml = "<youtube>"+x2js.json2xml_str($.parseJSON(str))+"</youtube>";
         console.log(xml);
 //        $('#resultados').html(str); //carga el resultado de la búsqueda en #resultados
     });
