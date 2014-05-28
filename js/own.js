@@ -53,8 +53,8 @@ var youtubeAPI = {
 
 var serieslyAPI = {
     //credenciales
-    app_ID: 2178,
-    app_secret: "TX7hZNhWKbehh4fKUbvX",
+    app_ID:  2178, //2458
+    app_secret: "TX7hZNhWKbehh4fKUbvX", //cteErTypg7ursNpnb26y
     mediaTypeMovie: 2,
     base_url: "http://api.series.ly/v2/", //para peticiones a la API
 
@@ -112,7 +112,7 @@ var serieslyAPI = {
      * método para solicitar las películas más vistas
      * dest: contenedor de destino
      */
-    browsePopular: function (dest,mode){
+    browsePopular: function (dest){
         var method = "media/most_seen/movies";
         var request_url = this.base_url+method;
         var data = {
@@ -171,7 +171,6 @@ var serieslyAPI = {
                     })
             })
     }
-
 }
 
 
@@ -181,6 +180,30 @@ function init(){
     initLinks();
     initInterface();
 };
+
+function checkNavigation(){
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    query = {};
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        query[pair[0]] = pair[1];
+    }
+
+    //ficha película
+    if (query.hasOwnProperty("movie")){
+        serieslyAPI.getInfo(query['movie']);
+    }
+
+//    //búsqueda
+//    if (query.hasOwnProperty("search")){
+//        var dest = $("#main .contenido");
+//        var busqueda = decodeURIComponent(query["search"]);
+//        serieslyAPI.search(busqueda,query["page"],dest);
+//        $("form[name='search-series'] > input[type='text']").val(busqueda);
+//    }
+
+}
 
 function loadSeriesly(){
     serieslyAPI.authenticate();
@@ -249,12 +272,12 @@ function initLinks(){
         form.forEach(function(object){ //reestructura los datos para la petición
             data[object.name] = object.value;
         })
+        console.log("p: "+page);
         searchSeries(data,page); //realiza la búsqueda de la página indicada
-    })
+    });
 
     var paginas = $(".pagination a.page").not(".next").not(".prev"); //paginas 1..actual..n
     var current = paginas.filter(".current");
-
     var anteriores = paginas.filter(function(){
        return parseInt($(this).attr("data-page-index")) < parseInt(current.attr("data-page-index"));
     });
@@ -264,8 +287,6 @@ function initLinks(){
         }
         $("<a href='#' class='page collapse'>...</a>").insertAfter(anteriores.filter(":eq(1)"));
     }
-
-
     var siguientes = paginas.filter(function(){
         return parseInt($(this).attr("data-page-index")) > parseInt(current.attr("data-page-index"));
     });
@@ -276,13 +297,15 @@ function initLinks(){
         $("<a href='#' class='page collapse'>...</a>").insertAfter(siguientes.filter(":eq(1)"));
     }
 
-
     /**
      * Navega a la ficha completa de la película
      */
     $("div.lista-peliculas > div.resumen-pelicula").on("click",function(){
         var $idm= $(this).attr("id");
-        serieslyAPI.getInfo($idm);
+        var url = window.location.protocol+"//"+window.location.host;  //window.location.href;
+        url += '?movie='+$idm;
+        window.location.href = url;
+//        serieslyAPI.getInfo($idm);
     })
 }
 
@@ -315,14 +338,6 @@ function setAnimations(){
     }).mouseleave(function(){
         $(this).find("div.info-pelicula").fadeOut();
     })
-
-//    $("div#buscador form[name='search-series'] input[type='text']").focus(function(){
-//        $(this).animate({"width": "100px"},500);
-//    });
-//
-//    $("div#buscador form[name='search-series'] input[type='text']").focusout(function(){
-//        $(this).animate({"width": "50px"},500,function(){$(this).css});
-//    });
 }
 
 function setStyles(){
@@ -355,9 +370,11 @@ function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este id
 }
 
 function searchSeries(data,page){
-    var p = page || 0;
     var dest = $("#main .contenido");
-    serieslyAPI.search(data['query'],p,dest);
+//    var url = window.location.protocol+"//"+window.location.host;  //window.location.href;
+//    url += '?search='+encodeURIComponent(data['query'])+"&p="+p;
+//    window.location.href = url;
+    serieslyAPI.search(data['query'],page,dest);
 }
 
 function setCookie(cname,cvalue,expDate)
@@ -369,6 +386,8 @@ function setCookie(cname,cvalue,expDate)
 
 function getCookie(cname)
 {
+    return "041890c7a7a1cc0b3343d686083135cf"; //TODO: borrar token PROVISIONAL
+
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++)
