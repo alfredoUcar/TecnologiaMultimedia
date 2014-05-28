@@ -47,6 +47,7 @@ var youtubeAPI = {
     loadAPIClientInterfaces: function(){
         gapi.client.load('youtube', 'v3', function() {
             console.log("youtube API loaded");
+            checkNavigation();
         });
     }
 }
@@ -156,16 +157,19 @@ var serieslyAPI = {
             url: request_url, //solicita el contenido de la página
             data: data
         }).done(function(resultsXML){// se ha recibido el resultado de la búsqueda en series.ly
-                console.log("respuesta ficha");
                 $.ajax({
                     url: "fichaPeli.php", //solicita la vista de los resultados
                     data: resultsXML,
                     type: 'POST',
                     processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
                 }).done(function(data){
-                        console.log("ver ficha");
-                        console.log(data);
                     $("#main .contenido").html(data);
+                    var titulo = $(".titulo-pelicula").text();
+                    var dataYoutube={
+                        "q": "trailer "+titulo
+                    };
+                    console.log(dataYoutube);
+                    searchYoutube(dataYoutube);
                 }).always(function(){
                         init();
                     })
@@ -195,15 +199,8 @@ function checkNavigation(){
         serieslyAPI.getInfo(query['movie']);
     }
 
-//    //búsqueda
-//    if (query.hasOwnProperty("search")){
-//        var dest = $("#main .contenido");
-//        var busqueda = decodeURIComponent(query["search"]);
-//        serieslyAPI.search(busqueda,query["page"],dest);
-//        $("form[name='search-series'] > input[type='text']").val(busqueda);
-//    }
-
 }
+
 
 function loadSeriesly(){
     serieslyAPI.authenticate();
@@ -272,7 +269,6 @@ function initLinks(){
         form.forEach(function(object){ //reestructura los datos para la petición
             data[object.name] = object.value;
         })
-        console.log("p: "+page);
         searchSeries(data,page); //realiza la búsqueda de la página indicada
     });
 
@@ -346,34 +342,20 @@ function setStyles(){
 
 // realiza una búsqueda en youtube con los datos pasados por parámetros
 function searchYoutube(data) {
+    console.log("buscando en youtube...");
     data['part'] = 'id,snippet'; //añade el parametro obligatorio para cualquier petición
     var request = gapi.client.youtube.search.list(data);
     request.execute(function(response) {
         var str = JSON.stringify(response.result);
-        $('#resultados').html(str); //carga el resultado de la búsqueda en #resultados
+        var x2js = new X2JS();
+        var xml = x2js.json2xml_str(str);
+        console.log(xml);
+//        $('#resultados').html(str); //carga el resultado de la búsqueda en #resultados
     });
-}
-
-function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este identificador a la cadena "GetCustomerData.php?id=" para crear la URL completa , y la cargamos en la pagina actual-->
-//    document.location="procesadorXSL.php?artista=" + sId;
-    $.ajax({
-        url: "procesadorXSL.php", //solicita el contenido de la página
-        data: data
-    }).done(function(data){
-            $("#resultados").html(data); //carga el contenido en la sección #main
-        }).fail(function(){
-            var html = $.parseHTML("<p>No se encuentra la página solicitada</p>"); //TODO: sustituir por una página de error
-            $("#resultados").html(html);
-        }).always(function(){
-            init(); //refresca los elementos
-        })
 }
 
 function searchSeries(data,page){
     var dest = $("#main .contenido");
-//    var url = window.location.protocol+"//"+window.location.host;  //window.location.href;
-//    url += '?search='+encodeURIComponent(data['query'])+"&p="+p;
-//    window.location.href = url;
     serieslyAPI.search(data['query'],page,dest);
 }
 
