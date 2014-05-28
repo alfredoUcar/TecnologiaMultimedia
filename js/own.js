@@ -131,7 +131,7 @@ var serieslyAPI = {
                     type: 'POST',
                     processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
                 }).done(function(data){
-                        dest.append(data);
+                        dest.html(data);
                 }).always(function(){
                     init(); //refresca los elementos
                 })
@@ -306,19 +306,30 @@ function initLinks(){
      /**
      * Habilita la navegación por categorias.
      */
-     $("#categorias ul li").on("click", function(e){
+     $(".mitem").on("click", function(e){
      	e.preventDefault();
-     	console.log("algo");
-     	$.ajax({
-            url: $(this).attr("id").concat(".html") //solicita el contenido de la página
-        }).done(function(data){
-                $("#main").html(data); //carga el contenido en la sección #main
-            }).fail(function(){
-                var html = $.parseHTML("<p>No se encuentra la página solicitada</p>"); //TODO: sustituir por una página de error
-                $("#main").html(html);
-            }).always(function(){
-                init(); //refresca los elementos
-            })
+     	var id = $(this).attr("id");
+     	switch(id){
+     		case "cinemedia":
+     			$.ajax({url: "cinemedia.html"}).done(function(data){
+					$("#main").html(data)		     			
+     			})
+     			break;
+     			
+     		case "masvisto":
+     			var mostSeenSelector = "#most-seen";
+     			$(mostSeenSelector).html("")
+    			serieslyAPI.browsePopular($(mostSeenSelector));
+     			break;
+			
+			case "rss":
+     			
+     			break;
+
+			default:
+				var html = $.parseHTML("<p>No se encuentra la página solicitada</p>"); 
+				$("#main").html(html);
+     	}
 
      })
 }
