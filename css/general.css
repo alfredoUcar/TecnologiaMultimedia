@@ -382,7 +382,7 @@ p.info-resultados{
 
 #youtube-related{
     position: relative;
-    margin: 100px 20px;
+    margin: 100px 10px;
     float: left;
     display: flex;
 }
@@ -392,6 +392,10 @@ p.info-resultados{
     width: 180px;
     background: rgb(42, 123, 197);
     color: white;
+}
+
+#youtube-related .video:hover{
+    background: rgb(14, 91, 173);
 }
 
 #youtube-related .video img{
@@ -404,4 +408,8 @@ p.info-resultados{
 
 #youtube-related .video p{
     margin: 5px 10px;
+}
+
+#youtube-related h3{
+    position: absolute;
 }
