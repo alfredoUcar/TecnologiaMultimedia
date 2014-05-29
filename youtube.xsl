@@ -6,7 +6,7 @@
 
 
     <xsl:template match="items">
-        <a class="video" href="https://www.youtube.com/watch?v={id/videoId}" target="_blank">
+        <a id="{id/videoId}" class="video" href="#" target="_blank">
             <div>
                 <img src="{snippet/thumbnails/medium/url}" />
                 <p><xsl:value-of select="snippet/title"/></p>

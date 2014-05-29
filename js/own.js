@@ -299,7 +299,15 @@ function initLinks(){
         var url = window.location.protocol+"//"+window.location.host;  //window.location.href;
         url += '?movie='+$idm;
         window.location.href = url;
-//        serieslyAPI.getInfo($idm);
+    })
+
+    /**
+     * Muestra el video en un pop-up
+     */
+    $("#youtube-related a.video").on("click",function(e){
+        e.preventDefault();
+        var id = $(this).attr("id");
+        youtubePopUp(id);
     })
 }
 
@@ -358,7 +366,6 @@ function searchYoutube(data) {
             }).always(function(){
                 init(); //refresca los elementos
             })
-//        $('#resultados').html(str); //carga el resultado de la búsqueda en #resultados
     });
 }
 
@@ -387,3 +394,18 @@ function getCookie(cname)
     return "";
 }
 
+function youtubePopUp(videoID){
+    //crea y añade el pop up
+    $("body").prepend($.parseHTML(
+        "<div id='pop-up'>" +
+            "<iframe allowfullscreen webkitallowfullscreen mozallowfullscreen width='640' height='360'" +
+            "src='http://www.youtube.com/embed/"+videoID+"?theme=light' >" +
+           "</iframe>" +
+        "</div>"
+    ));
+
+    $("#pop-up").on("click",function(e){
+        $(this).remove();
+    })
+
+}
