@@ -31,6 +31,7 @@
                     <xsl:apply-templates select="cast"/>
                 </table>
             </div>
+            <div id="youtube-related"></div>
         </div>
     </xsl:template>
 

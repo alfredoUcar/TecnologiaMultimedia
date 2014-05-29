@@ -47,14 +47,15 @@ var youtubeAPI = {
     loadAPIClientInterfaces: function(){
         gapi.client.load('youtube', 'v3', function() {
             console.log("youtube API loaded");
+            checkNavigation();
         });
     }
 }
 
 var serieslyAPI = {
     //credenciales
-    app_ID: 2178,
-    app_secret: "TX7hZNhWKbehh4fKUbvX",
+    app_ID:  2178, //2458
+    app_secret: "TX7hZNhWKbehh4fKUbvX", //cteErTypg7ursNpnb26y
     mediaTypeMovie: 2,
     base_url: "http://api.series.ly/v2/", //para peticiones a la API
 
@@ -112,7 +113,7 @@ var serieslyAPI = {
      * método para solicitar las películas más vistas
      * dest: contenedor de destino
      */
-    browsePopular: function (dest,mode){
+    browsePopular: function (dest){
         var method = "media/most_seen/movies";
         var request_url = this.base_url+method;
         var data = {
@@ -156,22 +157,24 @@ var serieslyAPI = {
             url: request_url, //solicita el contenido de la página
             data: data
         }).done(function(resultsXML){// se ha recibido el resultado de la búsqueda en series.ly
-                console.log("respuesta ficha");
                 $.ajax({
                     url: "fichaPeli.php", //solicita la vista de los resultados
                     data: resultsXML,
                     type: 'POST',
                     processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
                 }).done(function(data){
-                        console.log("ver ficha");
-                        console.log(data);
                     $("#main .contenido").html(data);
+                    var titulo = $(".titulo-pelicula").text();
+                    var dataYoutube={
+                        "q": "trailer "+titulo,
+                        "type": "video"
+                    };
+                    searchYoutube(dataYoutube);
                 }).always(function(){
                         init();
                     })
             })
     }
-
 }
 
 
@@ -181,6 +184,23 @@ function init(){
     initInterface();
     initLinks();
 };
+
+function checkNavigation(){
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    query = {};
+    for (var i=0;i<vars.length;i++) {
+        var pair = vars[i].split("=");
+        query[pair[0]] = pair[1];
+    }
+
+    //ficha película
+    if (query.hasOwnProperty("movie")){
+        serieslyAPI.getInfo(query['movie']);
+    }
+
+}
+
 
 function loadSeriesly(){
     serieslyAPI.authenticate();
@@ -203,8 +223,6 @@ function initForms(){
         var formName = $(this).attr("name");
         if (formName == "search-youtube"){
             searchYoutube(data);
-        }else if(formName == "search-persons"){
-            requestCustomerInfo(data);
         }else if(formName == "search-series"){
             searchSeries(data);
         }else{
@@ -250,11 +268,10 @@ function initLinks(){
             data[object.name] = object.value;
         })
         searchSeries(data,page); //realiza la búsqueda de la página indicada
-    })
+    });
 
     var paginas = $(".pagination a.page").not(".next").not(".prev"); //paginas 1..actual..n
     var current = paginas.filter(".current");
-
     var anteriores = paginas.filter(function(){
        return parseInt($(this).attr("data-page-index")) < parseInt(current.attr("data-page-index"));
     });
@@ -264,8 +281,6 @@ function initLinks(){
         }
         $("<a href='#' class='page collapse'>...</a>").insertAfter(anteriores.filter(":eq(1)"));
     }
-
-
     var siguientes = paginas.filter(function(){
         return parseInt($(this).attr("data-page-index")) > parseInt(current.attr("data-page-index"));
     });
@@ -276,13 +291,23 @@ function initLinks(){
         $("<a href='#' class='page collapse'>...</a>").insertAfter(siguientes.filter(":eq(1)"));
     }
 
-
     /**
      * Navega a la ficha completa de la película
      */
     $("div.lista-peliculas > div.resumen-pelicula").on("click",function(){
         var $idm= $(this).attr("id");
-        serieslyAPI.getInfo($idm);
+        var url = window.location.protocol+"//"+window.location.host;  //window.location.href;
+        url += '?movie='+$idm;
+        window.location.href = url;
+    })
+
+    /**
+     * Muestra el video en un pop-up
+     */
+    $("#youtube-related a.video").on("click",function(e){
+        e.preventDefault();
+        var id = $(this).attr("id");
+        youtubePopUp(id);
     })
 
      /**
@@ -363,14 +388,6 @@ function setAnimations(){
     }).mouseleave(function(){
         $(this).find("div.info-pelicula").fadeOut();
     })
-
-//    $("div#buscador form[name='search-series'] input[type='text']").focus(function(){
-//        $(this).animate({"width": "100px"},500);
-//    });
-//
-//    $("div#buscador form[name='search-series'] input[type='text']").focusout(function(){
-//        $(this).animate({"width": "50px"},500,function(){$(this).css});
-//    });
 }
 
 function setStyles(){
@@ -379,33 +396,30 @@ function setStyles(){
 
 // realiza una búsqueda en youtube con los datos pasados por parámetros
 function searchYoutube(data) {
+    console.log("buscando en youtube...");
     data['part'] = 'id,snippet'; //añade el parametro obligatorio para cualquier petición
     var request = gapi.client.youtube.search.list(data);
     request.execute(function(response) {
         var str = JSON.stringify(response.result);
-        $('#resultados').html(str); //carga el resultado de la búsqueda en #resultados
+        var x2js = new X2JS();
+        var xml = "<youtube>"+x2js.json2xml_str($.parseJSON(str))+"</youtube>";
+        console.log(xml);
+        $.ajax({
+            url: "relatedYoutube.php", //solicita la vista de los resultados
+            data: xml,
+            type: 'POST',
+            processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
+        }).done(function(data){
+                $("#youtube-related").html(data);
+            }).always(function(){
+                init(); //refresca los elementos
+            })
     });
 }
 
-function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este identificador a la cadena "GetCustomerData.php?id=" para crear la URL completa , y la cargamos en la pagina actual-->
-//    document.location="procesadorXSL.php?artista=" + sId;
-    $.ajax({
-        url: "procesadorXSL.php", //solicita el contenido de la página
-        data: data
-    }).done(function(data){
-            $("#resultados").html(data); //carga el contenido en la sección #main
-        }).fail(function(){
-            var html = $.parseHTML("<p>No se encuentra la página solicitada</p>"); //TODO: sustituir por una página de error
-            $("#resultados").html(html);
-        }).always(function(){
-            init(); //refresca los elementos
-        })
-}
-
 function searchSeries(data,page){
-    var p = page || 0;
     var dest = $("#main .contenido");
-    serieslyAPI.search(data['query'],p,dest);
+    serieslyAPI.search(data['query'],page,dest);
 }
 
 function setCookie(cname,cvalue,expDate)
@@ -417,6 +431,7 @@ function setCookie(cname,cvalue,expDate)
 
 function getCookie(cname)
 {
+
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++)
@@ -427,3 +442,18 @@ function getCookie(cname)
     return "";
 }
 
+function youtubePopUp(videoID){
+    //crea y añade el pop up
+    $("body").prepend($.parseHTML(
+        "<div id='pop-up'>" +
+            "<iframe allowfullscreen webkitallowfullscreen mozallowfullscreen width='640' height='360'" +
+            "src='http://www.youtube.com/embed/"+videoID+"?theme=light' >" +
+           "</iframe>" +
+        "</div>"
+    ));
+
+    $("#pop-up").on("click",function(e){
+        $(this).remove();
+    })
+
+}

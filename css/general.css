@@ -379,3 +379,51 @@ p.info-resultados{
 #ficha-pelicula p,h3{
     font-family: sans-serif;
 }
+
+#youtube-related{
+    position: relative;
+    margin: 100px 10px;
+    float: left;
+    display: flex;
+}
+
+#youtube-related .video{
+    border: 1px solid white;
+    width: 180px;
+    background: rgb(42, 123, 197);
+    color: white;
+}
+
+#youtube-related .video:hover{
+    background: rgb(14, 91, 173);
+}
+
+#youtube-related .video img{
+    border-radius: 0px;
+    margin-bottom: 5px;
+    width: 100%;
+    float: none;
+    border: none;
+}
+
+#youtube-related .video p{
+    margin: 5px 10px;
+}
+
+#youtube-related h3{
+    position: absolute;
+}
+
+#pop-up{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+#pop-up iframe{
+    position: fixed;
+    left: calc(50% - 320px);
+    top: calc(40% - 120px);
+}
