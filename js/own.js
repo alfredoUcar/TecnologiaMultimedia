@@ -166,9 +166,9 @@ var serieslyAPI = {
                     $("#main .contenido").html(data);
                     var titulo = $(".titulo-pelicula").text();
                     var dataYoutube={
-                        "q": "trailer "+titulo
+                        "q": "trailer "+titulo,
+                        "type": "video"
                     };
-                    console.log(dataYoutube);
                     searchYoutube(dataYoutube);
                 }).always(function(){
                         init();
@@ -223,8 +223,6 @@ function initForms(){
         var formName = $(this).attr("name");
         if (formName == "search-youtube"){
             searchYoutube(data);
-        }else if(formName == "search-persons"){
-            requestCustomerInfo(data);
         }else if(formName == "search-series"){
             searchSeries(data);
         }else{
@@ -350,6 +348,16 @@ function searchYoutube(data) {
         var x2js = new X2JS();
         var xml = "<youtube>"+x2js.json2xml_str($.parseJSON(str))+"</youtube>";
         console.log(xml);
+        $.ajax({
+            url: "relatedYoutube.php", //solicita la vista de los resultados
+            data: xml,
+            type: 'POST',
+            processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
+        }).done(function(data){
+                $("#youtube-related").html(data);
+            }).always(function(){
+                init(); //refresca los elementos
+            })
 //        $('#resultados').html(str); //carga el resultado de la búsqueda en #resultados
     });
 }
@@ -368,7 +376,6 @@ function setCookie(cname,cvalue,expDate)
 
 function getCookie(cname)
 {
-    return "041890c7a7a1cc0b3343d686083135cf"; //TODO: borrar token PROVISIONAL
 
     var name = cname + "=";
     var ca = document.cookie.split(';');

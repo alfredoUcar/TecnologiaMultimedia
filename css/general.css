@@ -379,3 +379,29 @@ p.info-resultados{
 #ficha-pelicula p,h3{
     font-family: sans-serif;
 }
+
+#youtube-related{
+    position: relative;
+    margin: 100px 20px;
+    float: left;
+    display: flex;
+}
+
+#youtube-related .video{
+    border: 1px solid white;
+    width: 180px;
+    background: rgb(42, 123, 197);
+    color: white;
+}
+
+#youtube-related .video img{
+    border-radius: 0px;
+    margin-bottom: 5px;
+    width: 100%;
+    float: none;
+    border: none;
+}
+
+#youtube-related .video p{
+    margin: 5px 10px;
+}
