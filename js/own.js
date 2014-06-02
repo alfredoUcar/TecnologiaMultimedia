@@ -149,7 +149,7 @@ var serieslyAPI = {
             idm: id,
             mediaType: this.mediaTypeMovie,
             response: 'xml',
-            iso_country: "ISO 3166-1 alpha-2"
+            iso_country: "ISO 3166-1 alpha-2" 
         }
 
         $.ajax({
@@ -170,7 +170,36 @@ var serieslyAPI = {
                         init();
                     })
             })
-    }
+    },
+
+    buscarGenero: function(genero,page,dest){
+	var method = "media/browse";
+        var request_url = this.base_url+method;
+        var data = {
+            auth_token: getCookie("auth_token"),
+            genre: genero,
+            mediaType: this.mediaTypeMovie,
+            response: 'xml',
+            iso_country: "ISO 3166-1 alpha-2",
+            page: page,
+            limit: 24
+        }
+ 	$.ajax({
+            url: request_url, //solicita el contenido de la página
+            data: data
+        }).done(function(data){
+			$.ajax({
+        	            url: "genrePelisXSL.php", //solicita la vista de los resultados
+        	            data: data,
+        	            type: 'POST',
+        	            processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
+        	        }).done(function(data){
+        	                dest.append(data);
+        	        }).always(function(){
+        	            //init(); //refresca los elementos
+        	        })
+	})
+	}
 
 }
 
@@ -286,25 +315,15 @@ function initLinks(){
     })
 
      /**
-     * Habilita la navegación mediante la barra de menu.
-     *//*
-     $("nav ul li ").on("click", function(e){
-     	e.preventDefault();
-     	$.ajax({
-            url: $(this).attr("id").concat(".html") //solicita el contenido de la página
-        }).done(function(data){
-                $("#main").html(data); //carga el contenido en la sección #main
-            }).fail(function(){
-                var html = $.parseHTML("<p>No se encuentra la página solicitada</p>"); //TODO: sustituir por una página de error
-                $("#main").html(html);
-            }).always(function(){
-                init(); //refresca los elementos
-            })
-
-     })
+     * Habilita la búsqueda por categorias en el menu.
+     */
+	$("ul.generos").on("click","li.genero",function(e){
+		console.log($(this))
+		serieslyAPI.buscarGenero($(this).attr("id"),0,$(".contenido"))
+	})
 
      /**
-     * Habilita la navegación por categorias.
+     * Habilita la navegación por las opciones del menu.
      */
      $(".mitem").on("click", function(e){
      	e.preventDefault();
@@ -322,13 +341,13 @@ function initLinks(){
     			serieslyAPI.browsePopular($(mostSeenSelector));
      			break;
 			
-			case "rss":
+		case "rss":
      			
      			break;
 
-			default:
-				var html = $.parseHTML("<p>No se encuentra la página solicitada</p>"); 
-				$("#main").html(html);
+		default:
+			var html = $.parseHTML("<p>No se encuentra la página solicitada</p>"); 
+			$("#main").html(html);
      	}
 
      })
@@ -398,7 +417,7 @@ function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este id
             var html = $.parseHTML("<p>No se encuentra la página solicitada</p>"); //TODO: sustituir por una página de error
             $("#resultados").html(html);
         }).always(function(){
-            init(); //refresca los elementos
+            //init(); //refresca los elementos
         })
 }
 
