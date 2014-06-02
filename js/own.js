@@ -189,12 +189,12 @@ var serieslyAPI = {
             data: data
         }).done(function(data){
 			$.ajax({
-        	            url: "genrePelisXSL.php", //solicita la vista de los resultados
+        	            url: "searchGeneroXSL.php", //solicita la vista de los resultados
         	            data: data,
         	            type: 'POST',
         	            processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
         	        }).done(function(data){
-        	                dest.append(data);
+        	                dest.html(data);
         	        }).always(function(){
         	            //init(); //refresca los elementos
         	        })
