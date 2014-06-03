@@ -344,7 +344,7 @@ function initLinks(){
      */
 	$("ul.generos").on("click","li.genero",function(e){
 		console.log($(this))
-		serieslyAPI.buscarGenero($(this).attr("id"),0,$(".contenido"))
+		serieslyAPI.buscarGenero($(this).attr("id"),0,$(".contenido"));
 	})
 
      /**
@@ -401,6 +401,9 @@ function loadGenres(){
 function loadContent(){
     var mostSeenSelector = "#most-seen";
     if ($(mostSeenSelector).is(':empty')) serieslyAPI.browsePopular($(mostSeenSelector)); //carga el contenido si está vacío
+
+    var content = ".contenido";
+    if ($(content).is(':empty')) serieslyAPI.buscarGenero("",0,$(content));
 }
 
 
@@ -454,7 +457,7 @@ function setCookie(cname,cvalue,expDate)
 
 function getCookie(cname)
 {
-
+    return "011c7168a4f8ac93f9488ff145d86749"; //TODO: borrar token provisional
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++)
