@@ -177,6 +177,7 @@ var serieslyAPI = {
     },
 
     buscarGenero: function(genero,page,dest){
+        $("#main .error").remove();
 		var method = "media/browse";
         var request_url = this.base_url+method;
         var data = {

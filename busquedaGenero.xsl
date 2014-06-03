@@ -5,18 +5,17 @@
     <xsl:template match="seriesly">
         <html>
             <body>
+
                 <xsl:apply-templates select='results'/>
                 <xsl:apply-templates select="movies/item"/>
+                <xsl:if test="error != 0">
+                    <h3 class="error" >Lo sentimos no se han encontrado resultados.</h3>
+                </xsl:if>
             </body>
         </html>
     </xsl:template>
 
     <xsl:template match="results">
-
-        <xsl:if test="totalResults = 0">
-            <p class="info-resultados" >Lo sentimos, no se han encontrado resultados para <b>"<xsl:value-of select="q"/>"</b>.</p>
-        </xsl:if>
-
         <div class="lista-peliculas">
             <xsl:apply-templates select="medias/item"/>
         </div>
