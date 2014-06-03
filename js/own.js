@@ -174,10 +174,10 @@ var serieslyAPI = {
                         init();
                     })
             })
-    }
+    },
 
     buscarGenero: function(genero,page,dest){
-	var method = "media/browse";
+		var method = "media/browse";
         var request_url = this.base_url+method;
         var data = {
             auth_token: getCookie("auth_token"),
@@ -200,9 +200,9 @@ var serieslyAPI = {
         	        }).done(function(data){
         	                dest.html(data);
         	        }).always(function(){
-        	            //init(); //refresca los elementos
+        	            init(); //refresca los elementos
         	        })
-	})
+		})
 	}
 }
 
@@ -325,8 +325,8 @@ function initLinks(){
      */
     $("div.lista-peliculas > div.resumen-pelicula").on("click",function(){
         var $idm= $(this).attr("id");
-        var url = window.location.protocol+"//"+window.location.host;  //window.location.href;
-        url += '?movie='+$idm;
+        var url = window.location.protocol+"//"+window.location.host+"/~tm28/";  //window.location.href;
+		url += '?movie='+$idm;
         window.location.href = url;
     })
 
@@ -360,11 +360,10 @@ function initLinks(){
      			})
      			break;
      			
-     		case "masvisto":
-     			var mostSeenSelector = "#most-seen";
-     			$(mostSeenSelector).html("")
-    			serieslyAPI.browsePopular($(mostSeenSelector));
-     			break;
+     		case "inicio":
+				var url = window.location.protocol+"//"+window.location.host+"/~tm28/";
+				window.location = url;
+				break;
 			
 		case "rss":
      			
@@ -376,6 +375,11 @@ function initLinks(){
      	}
 
      })
+	 
+	 /**
+	 * Muestra o esconde las categorias
+	 **/
+	
 }
 
 function initInterface(){
