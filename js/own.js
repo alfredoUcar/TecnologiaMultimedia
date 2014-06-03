@@ -164,7 +164,7 @@ var serieslyAPI = {
                     processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
                 }).done(function(data){
                     $("#main .contenido").html(data);
-                    var titulo = $(".titulo-pelicula").text();
+                    var titulo = $("#ficha-pelicula .titulo-pelicula").text();
                     var dataYoutube={
                         "q": "trailer "+titulo,
                         "type": "video"
@@ -325,7 +325,7 @@ function initLinks(){
      */
     $("div.lista-peliculas > div.resumen-pelicula").on("click",function(){
         var $idm= $(this).attr("id");
-        var url = window.location.protocol+"//"+window.location.host+"/~tm28/";  //window.location.href;
+        var url = window.location.protocol+"//"+window.location.host;//+"/~tm28/";  //window.location.href;
 		url += '?movie='+$idm;
         window.location.href = url;
     })
@@ -361,8 +361,8 @@ function initLinks(){
      			break;
      			
      		case "inicio":
-				var url = window.location.protocol+"//"+window.location.host+"/~tm28/";
-				window.location = url;
+				var url = window.location.protocol+"//"+window.location.host;//+"/~tm28/";
+				window.location.href = url;
 				break;
 			
 		case "rss":
@@ -438,21 +438,6 @@ function searchYoutube(data) {
                 init(); //refresca los elementos
             })
     });
-}
-
-function requestCustomerInfo(data) {    <!-- A continuaci�n a�adimos este identificador a la cadena "GetCustomerData.php?id=" para crear la URL completa , y la cargamos en la pagina actual-->
-//    document.location="procesadorXSL.php?artista=" + sId;
-    $.ajax({
-        url: "procesadorXSL.php", //solicita el contenido de la página
-        data: data
-    }).done(function(data){
-            $("#resultados").html(data); //carga el contenido en la sección #main
-        }).fail(function(){
-            var html = $.parseHTML("<p>No se encuentra la página solicitada</p>"); //TODO: sustituir por una página de error
-            $("#resultados").html(html);
-        }).always(function(){
-            //init(); //refresca los elementos
-        })
 }
 
 function searchSeries(data,page){
