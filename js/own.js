@@ -104,6 +104,7 @@ var serieslyAPI = {
                     processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
                 }).done(function(data){
                     dest.html(data);
+                        $(".contenido .lista-peliculas").attr("data-filter", "search");
                 }).always(function(){
                     init(); //refresca los elementos
                 })
@@ -200,6 +201,10 @@ var serieslyAPI = {
         	            processData: false //para pasar 'data' como un objeto (sin pre-procesarlo)
         	        }).done(function(data){
         	                dest.html(data);
+                                $(".contenido .lista-peliculas")
+                                    .attr({"data-genre": genero,
+                                        "data-filter": "genre"}
+                                );
         	        }).always(function(){
         	            init(); //refresca los elementos
         	        })
@@ -292,12 +297,19 @@ function initLinks(){
     $(".pagination a.page").not(".current").on("click",function(e){
         e.preventDefault();
         var page = $(this).attr("data-page-index"); //obtiene el indice de la página
-        var form = $("form").serializeArray(); //lee los datos del formulario
-        var data = {};
-        form.forEach(function(object){ //reestructura los datos para la petición
-            data[object.name] = object.value;
-        })
-        searchSeries(data,page); //realiza la búsqueda de la página indicada
+        var resultados = $(".contenido .lista-peliculas");
+        if (resultados.attr("data-filter") == "search"){
+            var form = $("form").serializeArray(); //lee los datos del formulario
+            var data = {};
+            form.forEach(function(object){ //reestructura los datos para la petición
+                data[object.name] = object.value;
+            });
+            searchSeries(data,page); //realiza la búsqueda de la página indicada
+        }else if (resultados.attr("data-filter") == "genre"){
+            console.log("pag genero");
+            var genero = resultados.attr("data-genre");
+            serieslyAPI.buscarGenero(genero,page,$(".contenido"));
+        }
     });
 
     var paginas = $(".pagination a.page").not(".next").not(".prev"); //paginas 1..actual..n
@@ -345,8 +357,6 @@ function initLinks(){
      */
 	$("ul.generos").on("click","li.genero",function(e){
 		console.log($(this));
-        var url = window.location.href.split("?")[0];
-        window.location.href = url;
 		serieslyAPI.buscarGenero($(this).attr("id"),0,$(".contenido"));
 	})
 
