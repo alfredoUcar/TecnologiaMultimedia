@@ -470,7 +470,6 @@ function setCookie(cname,cvalue,expDate)
 
 function getCookie(cname)
 {
-    return "6fca57749bbfd6a84d7a72ae3ba856b0"; //TODO: borrar token provisional
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for(var i=0; i<ca.length; i++)
