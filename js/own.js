@@ -344,7 +344,9 @@ function initLinks(){
      * Habilita la búsqueda por categorias en el menu.
      */
 	$("ul.generos").on("click","li.genero",function(e){
-		console.log($(this))
+		console.log($(this));
+        var url = window.location.href.split("?")[0];
+        window.location.href = url;
 		serieslyAPI.buscarGenero($(this).attr("id"),0,$(".contenido"));
 	})
 
