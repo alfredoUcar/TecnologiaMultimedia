@@ -325,7 +325,7 @@ function initLinks(){
      */
     $("div.lista-peliculas > div.resumen-pelicula").on("click",function(){
         var $idm= $(this).attr("id");
-        var url = window.location.protocol+"//"+window.location.host;//+"/~tm28/";  //window.location.href;
+        var url = window.location.protocol+"//"+window.location.host+"/~tm28/";  //window.location.href;
 		url += '?movie='+$idm;
         window.location.href = url;
     })
@@ -361,7 +361,7 @@ function initLinks(){
      			break;
      			
      		case "inicio":
-				var url = window.location.protocol+"//"+window.location.host;//+"/~tm28/";
+				var url = window.location.protocol+"//"+window.location.host+"/~tm28/";
 				window.location.href = url;
 				break;
 			
