@@ -19,3 +19,6 @@ Catálogo de películas
 - CSS3
 - JavaScript
 - JQuery
+- PHP
+- XML
+- XSL
